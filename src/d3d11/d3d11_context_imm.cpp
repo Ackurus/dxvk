@@ -198,10 +198,6 @@ namespace dxvk {
     // we don't mess up the execution order
     FlushCsChunk();
     
-    // As an optimization, flush everything if the
-    // number of pending draw calls is high enough.
-    FlushImplicit(FALSE);
-    
     // Dispatch command list to the CS thread and
     // restore the immediate context's state
     commandList->EmitToCsThread(&m_csThread);
