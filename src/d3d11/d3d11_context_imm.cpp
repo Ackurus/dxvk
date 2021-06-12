@@ -81,12 +81,10 @@ namespace dxvk {
     if (hr == S_FALSE) {
       // Don't mark the event query as stalling if the app does
       // not intend to spin on it. This reduces flushes on End.
-      if (!(GetDataFlags & D3D11_ASYNC_GETDATA_DONOTFLUSH))
+      if (!(GetDataFlags & D3D11_ASYNC_GETDATA_DONOTFLUSH)) {
         query->NotifyStall();
-
-      // Ignore the DONOTFLUSH flag here as some games will spin
-      // on queries without ever flushing the context otherwise.
-      FlushImplicit(FALSE);
+        FlushImplicit(FALSE);
+      }
     }
     
     return hr;
