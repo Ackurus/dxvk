@@ -592,10 +592,6 @@ namespace dxvk {
     
     if (Resource->isInUse(access)) {
       if (MapFlags & D3D11_MAP_FLAG_DO_NOT_WAIT) {
-        // We don't have to wait, but misbehaving games may
-        // still try to spin on `Map` until the resource is
-        // idle, so we should flush pending commands
-        FlushImplicit(FALSE);
         return false;
       } else {
         // Make sure pending commands using the resource get
