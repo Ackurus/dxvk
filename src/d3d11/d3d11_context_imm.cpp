@@ -195,6 +195,9 @@ namespace dxvk {
     // Flush any outstanding commands so that
     // we don't mess up the execution order
     FlushCsChunk();
+    // See if flushing the draw state here prevents flickering gas and reduces
+    // latency.
+    Flush();
     
     // Dispatch command list to the CS thread and
     // restore the immediate context's state
@@ -590,6 +593,8 @@ namespace dxvk {
     
     if (Resource->isInUse(access)) {
       if (MapFlags & D3D11_MAP_FLAG_DO_NOT_WAIT) {
+	// Reintroduce implicit flushing to smooth out framerates
+	FlushImplicit(FALSE);
         return false;
       } else {
         // Make sure pending commands using the resource get
