@@ -628,8 +628,12 @@ namespace dxvk {
                      + IncFlushIntervalUs * pending;
 
       // Prevent flushing too often in short intervals.
-      if (now - m_lastFlush >= std::chrono::microseconds(delay))
+      if (now - m_lastFlush >= std::chrono::microseconds(delay)) {
         Flush();
+      } else if (pending > MaxPendingSubmits) {
+        // Always flush if pending is over limit.
+        Flush();
+      }
     }
   }
 
