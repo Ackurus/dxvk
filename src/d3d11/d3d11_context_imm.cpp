@@ -3,9 +3,9 @@
 #include "d3d11_device.h"
 #include "d3d11_texture.h"
 
-constexpr static uint32_t MinFlushIntervalUs = 750;
+constexpr static uint32_t MinFlushIntervalUs = 3000;
 constexpr static uint32_t IncFlushIntervalUs = 250;
-constexpr static uint32_t MaxPendingSubmits  = 6;
+constexpr static uint32_t MaxPendingSubmits  = 12;
 
 namespace dxvk {
   
