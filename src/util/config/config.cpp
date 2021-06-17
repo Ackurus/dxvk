@@ -68,10 +68,6 @@ namespace dxvk {
     { R"(\\FIFA(19|[2-9][0-9])(_demo)?\.exe$)", {{
       { "dxvk.useRawSsbo",                  "True" },
     }} },
-    /* Final Fantasy XIV: Fix random black blocks */
-    { R"(\\ffxiv_dx11\.exe$)", {{
-      { "d3d11.enableRtOutputNanFixup",     "True" },
-    }} },
     /* Resident Evil 2/3: Ignore WaW hazards      */
     { R"(\\re(2|3|3demo)\.exe$)", {{
       { "d3d11.relaxedBarriers",            "True" },
@@ -111,6 +107,11 @@ namespace dxvk {
     /* NieR:Automata                              */
     { R"(\\NieRAutomata\.exe$)", {{
       { "d3d11.constantBufferRangeCheck",   "True" },
+    }} },
+    /* NieR Replicant                             */
+    { R"(\\NieR Replicant ver\.1\.22474487139\.exe)", {{
+      { "dxgi.syncInterval",                "1"   },
+      { "dxgi.maxFrameRate",                "60"  },
     }} },
     /* SteamVR performance test                   */
     { R"(\\vr\.exe$)", {{
@@ -422,6 +423,14 @@ namespace dxvk {
     /* Kohan II                                  */
     { R"(\\k2\.exe$)", {{
       { "d3d9.memoryTrackTest",             "True" },
+    }} },
+    /* Ninja Gaiden Sigma 1/2                    */
+    { R"(\\NINJA GAIDEN SIGMA(2)?\.exe$)", {{
+      { "d3d9.deferSurfaceCreation",        "True" },
+    }} },
+    /* Demon Stone breaks at frame rates > 60fps */
+    { R"(\\Demonstone\.exe$)", {{
+      { "d3d9.maxFrameRate",                "60" },
     }} },
   }};
 
